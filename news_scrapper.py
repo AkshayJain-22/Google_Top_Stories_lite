@@ -1,5 +1,7 @@
 from bs4 import BeautifulSoup as bs
 import requests
+from datetime import datetime
+import pytz
 
 def scrapper(q):
     headers = {
@@ -18,7 +20,8 @@ def scrapper(q):
                 'Name': q,
                 'titles':[],
                 'sources':[],
-                'pub_times':[]
+                'pub_times':[],
+                'scrapping_time':[]
              }
     for news in all_news:
         try:
@@ -32,10 +35,13 @@ def scrapper(q):
             result['titles'].append(title)
             result['sources'].append(source)
             result['pub_times'].append(pub_time)
-            
+            new_york_tz = pytz.timezone('America/New_York')
+            result['scrapping_time'].append(datetime.now(new_york_tz).strftime('%Y-%m-%d %H:%M'))
+
     if len(result['titles'])!=0:
         print(f'{q}: Scrapped Successfuly')
     else:
         print(f'{q}: No Top News or error in name')
 
     return(result)
+
