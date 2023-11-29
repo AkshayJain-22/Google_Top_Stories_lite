@@ -4,14 +4,13 @@ import pandas as pd
 
 def sheet_append(name,individual):
 
-    sa = gspread.service_account(filename="/Users/akshayjain/Google Top News/google_top_news/creds_SK_gspread.json")
     # The key of the spreadsheet we want to access
     spreadsheet_key =  '1ZaP2e7mangNOX5C2bay1vE_uYxAENJcsLKitjnxBaQ4'
 
     ## Connect to our service account
     scope = ['https://spreadsheets.google.com/feeds']
     # Use the service account credentials to authorize our application (have also attached this credentials file)
-    credentials = ServiceAccountCredentials.from_json_keyfile_name('creds_SK_gspread.json', scope)
+    credentials = ServiceAccountCredentials.from_json_keyfile_name('./creds_SK_gspread.json', scope)
     gc = gspread.authorize(credentials)
     book = gc.open_by_key(spreadsheet_key)
     worksheet = book.worksheet(name)
