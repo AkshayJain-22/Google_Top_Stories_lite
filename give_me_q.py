@@ -1,5 +1,6 @@
-def q_generator():
-    with open('files/names.csv') as file:
+def q_generator(sport):
+    print(sport)
+    with open(f'files/{sport}.csv') as file:
         names = (file.readlines())
     
     for name in range(len(names)):
